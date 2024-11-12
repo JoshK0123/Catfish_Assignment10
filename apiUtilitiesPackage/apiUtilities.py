@@ -21,11 +21,12 @@ class APIConnection(object):
     """
     Establishes a connection to a database
     """
-    def __init__(self, parsed_json):
+    def __init__(self, api_key):
         """
         Constructor
+        @ param api_key string: key to api 
         """        
-        self.__parsed_json = parsed_json
+        self.__api_key = api_key
     def APILoader():
         """
         Gets an API, loads it and then stores it into a python dictionary
@@ -49,3 +50,26 @@ class APIConnection(object):
         imageJPGLink = randomDataFromAPI['hdurl']
         
         
+        informationSentenceAboutDailyUsageImage = "The NASA Astronomy Picture of the Day for the date " + imageDate + " is copyrighted by " + "'" + imageTitle + "'" + "The link to the image so that you can check it" + " '" + "The explanation of the image says " + "'" + imageExplanation + "'"
+        print(informationSentenceAboutDailyUsageImage) #This sentence uses the random data from the api request parameters. There are 10 different outcomes of the data that can make the sentence
+
+        #Below writes teh results of the API request to CSV
+        with open('NASAData.csv', 'w', newline='') as csvfile:
+            fieldnames = ['copyright', 'date', 'explanation', 'hdurl', 'media_type', 'service_version', 'title', 'url']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            writer.writeheader()
+            for row in parsed_json:
+                writer.writerow(row)
+
+            def __str__(self):
+                '''
+                @return String: A human redable basic representation of the current object
+                '''
+
+                return "key: " + self.__api_key
+            def __repr__(self):
+                '''
+                @reurn String: A String containing code that can be executed to create a copy of the current object
+                '''
+                return f"Key('{self.__api_key}')"
