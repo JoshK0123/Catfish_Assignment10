@@ -50,10 +50,10 @@ class APIConnection(object):
         imageJPGLink = randomDataFromAPI['hdurl']
         
         
-        informationSentenceAboutDailyUsageImage = "The NASA Astronomy Picture of the Day for the date " + imageDate + " is copyrighted by " + "'" + imageTitle + "'" + "The link to the image so that you can check it" + " '" + "The explanation of the image says " + "'" + imageExplanation + "'"
-        print(informationSentenceAboutDailyUsageImage) #This sentence uses the random data from the api request parameters. There are 10 different outcomes of the data that can make the sentence
+        informationSentenceAboutDailyImage = "The NASA Astronomy Picture of the Day for the date " + imageDate + " is copyrighted by " + imageCopyright + "." + " The title of the image is " + "'" + imageTitle + ".'" + " The link to the image so that you can check it out is " + imageJPGLink + "." + " The explanation of the image says " + "'" + imageExplanation + "'"
+        print(informationSentenceAboutDailyImage) #This sentence uses the random data from the api request parameters. There are 10 different outcomes of the data that can make the sentence
 
-        #Below writes teh results of the API request to CSV
+        #Below writes the results of the API request to CSV
         with open('NASAData.csv', 'w', newline='') as csvfile:
             fieldnames = ['copyright', 'date', 'explanation', 'hdurl', 'media_type', 'service_version', 'title', 'url']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -64,7 +64,7 @@ class APIConnection(object):
 
             def __str__(self):
                 '''
-                @return String: A human redable basic representation of the current object
+                @return String: A human readable basic representation of the current object
                 '''
 
                 return "key: " + self.__api_key
